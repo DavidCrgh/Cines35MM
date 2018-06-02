@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "729365445637",
+    "firebase_url": "https://cines35mm-53a06.firebaseio.com",
+    "project_id": "cines35mm-53a06",
+    "storage_bucket": "cines35mm-53a06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729365445637:android:c9199403221716c1",
+        "android_client_info": {
+          "package_name": "com.davidcr.cines35mm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729365445637-7finjsr57kpiq29u51vbkr12h6ibcq85.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "729365445637-7finjsr57kpiq29u51vbkr12h6ibcq85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNfl0gjLzSg6G1Pwg-rGMYVryHrB2nWQY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
