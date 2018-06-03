@@ -36,10 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Para saltar directo al inicio, quitar despues //TODO
-        Intent intent = new Intent(this, HomeAdminActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         ///////////////////////////////////////////////////////////////
-        firebaseAuth = FirebaseAuth.getInstance();
+        /*firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null){
 
         }
@@ -49,8 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         contrasena = (EditText) findViewById(R.id.editText2);
         Signin = (TextView) findViewById(R.id.textView3);
         Ingresar.setOnClickListener(this);
-        Signin.setOnClickListener(this);
+        Signin.setOnClickListener(this);*/
     }
+
     public void LogIn(){
         String con = contrasena.getText().toString().trim();
         String em  = email.getText().toString().trim();
@@ -85,7 +86,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
-
 
     @Override
     public void onClick(View v) {
