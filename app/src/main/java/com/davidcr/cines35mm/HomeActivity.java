@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        obtenerPeliculasSimplesFirebase();
+        obtenerPeliculasInicio();
 
         /*ArrayList<PeliculaSimple> peliculaSimples = new ArrayList<>();
         peliculaSimples.add(new PeliculaSimple("Titanic","1980"));
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
         peliculaSimples.add(new PeliculaSimple("Scarface", "1987"));*/
 /*
         mAdapter = new PeliculaSimpleAdapter(
-                obtenerPeliculasSimplesFirebase()
+                obtenerPeliculasInicio()
         );
         mRecyclerView.setAdapter(mAdapter);*/
     }
@@ -153,7 +153,7 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    public void obtenerPeliculasSimplesFirebase(){
+    public void obtenerPeliculasInicio(){
         DatabaseReference mBasedatos = FirebaseDatabase.getInstance().getReference().child("peliculas");
 
         mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
