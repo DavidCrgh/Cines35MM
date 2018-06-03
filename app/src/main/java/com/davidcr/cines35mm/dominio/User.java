@@ -1,7 +1,16 @@
 package com.davidcr.cines35mm.dominio;
+import android.support.annotation.NonNull;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class User {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+public class User  {
     private static  AtomicInteger count = new AtomicInteger(0);
     public int id;
     public String username ;
@@ -54,12 +63,12 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String email, String password,boolean bloqueado, boolean Admin) {
+    public User(String username, String email, String password) {
         this.id = count.incrementAndGet();
         this.username = username;
         this.email = email;
         this.password = password;
-        this.bloqueado = bloqueado;
-        this.Admin = Admin;
+        this.bloqueado = false;
+        this.Admin = true;
     }
 }

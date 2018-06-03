@@ -12,12 +12,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.davidcr.cines35mm.dominio.Pelicula;
+import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.davidcr.cines35mm.dominio.User;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import java.util.List;
+import java.util.ArrayList;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
@@ -30,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView Signin;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-
+    private FirebaseDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     public void LogIn(){
         String con = contrasena.getText().toString().trim();
-        String em  = email.getText().toString().trim();
+        final String  em  = email.getText().toString().trim();
 
         if (TextUtils.isEmpty(em)){
             Toast.makeText(this,"Por favor ingrese su correo",Toast.LENGTH_SHORT).show();
@@ -63,27 +73,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         progressDialog.setMessage("Verificando usuario...");
         progressDialog.show();
-
         firebaseAuth.signInWithEmailAndPassword(em,con)
                 .addOnCompleteListener(this,new OnCompleteListener<AuthResult>()
                 {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             finish();
                             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            if(firebaseAuth.getCurrentUser().getDisplayName().equals("true"))
+                            {
+                                //abrir administrador
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), SingIn.class));
+
+                            }
                         }
-                        else {
-                            Toast.makeText(LoginActivity.this,"Ingrese de nuevo sus credenciales",Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
+                        else{
+
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
                         }
                     }
+
                 });
-
-
     }
-
 
     @Override
     public void onClick(View v) {

@@ -12,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.davidcr.cines35mm.dominio.Favorito;
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.adapters.PeliculaSimpleAdapter;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
@@ -20,9 +22,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.SocketPermission;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -142,7 +148,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_recomendaciones) {
 
         } else if (id == R.id.nav_favoritas) {
-
+            obtenerPeliculasFavoritas();
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {
@@ -155,6 +161,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void obtenerPeliculasInicio(){
+        //Todas las peliculas
         DatabaseReference mBasedatos = FirebaseDatabase.getInstance().getReference().child("peliculas");
 
         mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -170,9 +177,53 @@ public class HomeActivity extends AppCompatActivity
         });
     }
 
+public void obtenerPeliculasFavoritas(){
+    final List<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
+    //todas las peliculas
+    final DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
+    //Peliculas favoritas de usuario
+    Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo("Matilda".toString());
+    mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull final DataSnapshot dataSnapshotF) {
+            //poder leer peliculas
+            peliculas.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshotF : dataSnapshotF.getChildren()) {
+                        String llaveF = snapshotF.getKey();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String llave = snapshot.getKey();
+                            System.out.println("llave: "+llave);
+                            Pelicula pelicula = snapshot.getValue(Pelicula.class);
+                            if (llaveF.equals(llave)) {
+                                peliculasFavoritas.add(new PeliculaSimple(
+                                        llave,
+                                        pelicula
+                                ));
+                            }
+                           // mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas,PeliculaSimpleAdapter.)));
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+
+}
+
     private void desplegarPeliculasSimples(DataSnapshot dataSnapshot){
         ArrayList<PeliculaSimple> peliculasSimples = new ArrayList<>();
-
 
         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
             String llave = snapshot.getKey();
@@ -185,4 +236,8 @@ public class HomeActivity extends AppCompatActivity
 
         mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasSimples, this));
     }
+
+
+
+
 }
