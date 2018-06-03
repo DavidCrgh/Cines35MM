@@ -102,6 +102,7 @@ public class HomeActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         obtenerPeliculasInicio();
+        configurarBotonBuscar();
 
         /*ArrayList<PeliculaSimple> peliculaSimples = new ArrayList<>();
         peliculaSimples.add(new PeliculaSimple("Titanic","1980"));
