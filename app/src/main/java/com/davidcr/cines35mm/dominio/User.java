@@ -1,4 +1,4 @@
-package com.davidcr.cines35mm;
+package com.davidcr.cines35mm.dominio;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
