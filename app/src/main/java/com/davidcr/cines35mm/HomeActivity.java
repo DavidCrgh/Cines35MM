@@ -1,5 +1,6 @@
 package com.davidcr.cines35mm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.davidcr.cines35mm.dominio.Favorito;
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.adapters.PeliculaSimpleAdapter;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +155,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {
-
+           // firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -178,18 +183,23 @@ public class HomeActivity extends AppCompatActivity
     }
 
 public void obtenerPeliculasFavoritas(){
+
     final List<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
     //todas las peliculas
     final DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
+
     //Peliculas favoritas de usuario
     Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo("Matilda".toString());
     mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull final DataSnapshot dataSnapshotF) {
+            //todas las peliculas
+            DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
             //poder leer peliculas
             peliculas.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
                     for (DataSnapshot snapshotF : dataSnapshotF.getChildren()) {
                         String llaveF = snapshotF.getKey();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -202,7 +212,10 @@ public void obtenerPeliculasFavoritas(){
                                         pelicula
                                 ));
                             }
+
                            // mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas,PeliculaSimpleAdapter.)));
+
+                            mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas, getApplicationContext()));
                         }
                     }
                 }

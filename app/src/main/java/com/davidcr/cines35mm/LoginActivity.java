@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             {
                                 //abrir administrador
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), SingIn.class));
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
                             }
                         }
