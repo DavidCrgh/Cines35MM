@@ -9,14 +9,6 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/nav_option_inicio" />
         <item
-            android:id="@+id/nav_recomendaciones"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_option_recomendaciones" />
-        <item
-            android:id="@+id/nav_favoritas"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/nav_option_Favoritas" />
-        <item
             android:id="@+id/nav_comentarios"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/nav_option_comentarios" />

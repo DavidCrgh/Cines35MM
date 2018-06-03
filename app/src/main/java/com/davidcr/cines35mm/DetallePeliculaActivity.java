@@ -2,11 +2,15 @@ package com.davidcr.cines35mm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DetallePeliculaActivity extends AppCompatActivity {
     private Pelicula pelicula;
@@ -17,6 +21,7 @@ public class DetallePeliculaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_pelicula);
         getIncomingIntent();
         llenarDetallesPelicula();
+        configurarInterfazAdmin();
         //Hace que no despliege el teclado cuando se abre la actividad
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
@@ -48,5 +53,23 @@ public class DetallePeliculaActivity extends AppCompatActivity {
 
         TextView keywords = findViewById(R.id.tv_keywords);
         keywords.setText("Keywords: " + Pelicula.arrayToString(pelicula.getKeywords()));
+    }
+
+    private void configurarInterfazAdmin(){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser().getDisplayName().equals("true")){
+            //Si es admin
+            Button boton_favoritos = findViewById(R.id.btn_favorito);
+            boton_favoritos.setText("EDIT");
+
+            findViewById(R.id.txt_favoritos).setVisibility(View.INVISIBLE);
+
+            findViewById(R.id.pt_comentario).setVisibility(View.GONE);
+
+            findViewById(R.id.btn_comentario).setVisibility(View.GONE);
+
+            //EditText entrada_comentario = findViewById(R.id.pt_comentario);
+            //entrada_comentario.setVisibility(View.GONE);
+        }
     }
 }

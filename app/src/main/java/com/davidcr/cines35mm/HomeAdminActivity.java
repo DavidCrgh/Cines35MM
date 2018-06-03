@@ -115,10 +115,6 @@ public class HomeAdminActivity extends AppCompatActivity
 
         if (id == R.id.nav_inicio) {
 
-        } else if (id == R.id.nav_recomendaciones) {
-
-        } else if (id == R.id.nav_favoritas) {
-
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {
