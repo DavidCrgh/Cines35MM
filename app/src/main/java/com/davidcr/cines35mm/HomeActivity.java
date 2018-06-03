@@ -18,6 +18,8 @@ import com.davidcr.cines35mm.dominio.Favorito;
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.adapters.PeliculaSimpleAdapter;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -179,7 +181,9 @@ public class HomeActivity extends AppCompatActivity
 
 public void obtenerPeliculasFavoritas(){
     //Peliculas favoritas de usuario
-    Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo("Matilda".toString());
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    System.out.println("Current user"+currentUser.getEmail());
+    Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo(currentUser.getEmail());
     mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull final DataSnapshot dataSnapshotF) {
