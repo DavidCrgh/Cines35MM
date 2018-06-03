@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cines35MM</string>
     <string name="title_activity_home">Cines 35MM</string>
+    <string name="title_activity_home_admin">Cines 35MM - Administrador</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -12,5 +13,5 @@
     <string name="nav_option_Favoritas">Favoritas</string>
     <string name="nav_option_comentarios">Mis Comentarios</string>
     <string name="nav_option_salir">Salir</string>
-    <string name="title_activity_home_admin">HomeAdminActivity</string>
+
 </resources>
