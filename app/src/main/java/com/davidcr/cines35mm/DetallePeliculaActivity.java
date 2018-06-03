@@ -2,6 +2,7 @@ package com.davidcr.cines35mm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.davidcr.cines35mm.dominio.Pelicula;
@@ -16,6 +17,7 @@ public class DetallePeliculaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_pelicula);
         getIncomingIntent();
         llenarDetallesPelicula();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void getIncomingIntent(){

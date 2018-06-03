@@ -2,8 +2,7 @@
 <resources>
     <color name="colorPrimary">#313133</color>
     <color name="colorPrimaryDark">#232325</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="Cines_Grey">#484848</color>
-    <color name="year">#999999</color>
-    <color name="title">#222222</color>
+    <color name="colorAccent">#ae2128</color>
+    <color name="Cines_Grey">#3d3d3d</color>
+    <color name="title">#999999</color>
 </resources>

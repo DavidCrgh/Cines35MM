@@ -11,7 +11,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Para saltar directo al inicio, quitar despues //TODO
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, HomeAdminActivity.class);
         startActivity(intent);
         ///////////////////////////////////////////////////////////////
     }
