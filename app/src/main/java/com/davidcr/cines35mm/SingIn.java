@@ -119,7 +119,7 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
 
                     if(newUser.isAdmin() == true){
                          //pantalla de administradores
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeAdminActivity.class));
 
                     }
                     else{
