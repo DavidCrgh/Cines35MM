@@ -46,7 +46,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Para saltar directo al inicio, quitar despues //TODO
-        ///////////////////////////////////////////////////////////////
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null){
 

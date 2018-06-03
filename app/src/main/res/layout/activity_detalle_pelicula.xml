@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Cines_Grey"
     tools:context=".DetallePeliculaActivity">
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Titulo"
+        android:textColor="@android:color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +28,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:text="Anno y generos"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
 
@@ -47,6 +50,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="39dp"
         android:text="Sinopsis:"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
@@ -59,6 +63,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Directores: "
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_sinopsis" />
@@ -71,6 +76,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Actores: "
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_directores" />
@@ -83,6 +89,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="Keywords: "
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
         app:layout_constraintTop_toBottomOf="@+id/tv_actores" />
@@ -93,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="68dp"
         android:layout_marginTop="12dp"
+        android:background="@android:color/darker_gray"
         android:text="FAV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
@@ -103,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="AGREGAR A FAVORITOS"
+        android:textColor="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_favorito" />
 
@@ -122,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Comentarios"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
@@ -144,6 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@android:color/darker_gray"
         android:text="OK"
         app:layout_constraintBaseline_toBaselineOf="@+id/pt_comentario"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,10 +163,12 @@
     <ListView
         android:id="@+id/lv_comentarios"
         android:layout_width="368dp"
-        android:layout_height="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_comentario" />

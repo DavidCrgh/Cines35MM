@@ -21,8 +21,13 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".SingIn"></activity>
         <activity android:name=".DetallePeliculaActivity"></activity>
+        <activity
+            android:name=".HomeAdminActivity"
+            android:label="@string/title_activity_home_admin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
