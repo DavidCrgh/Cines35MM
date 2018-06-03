@@ -61,6 +61,10 @@ public class PeliculaSimpleAdapter extends RecyclerView.Adapter<PeliculaSimpleAd
         });
     }
 
+    public Context getmContext() {
+        return mContext;
+    }
+
     @Override
     public int getItemCount() {
         return moviesList.size();

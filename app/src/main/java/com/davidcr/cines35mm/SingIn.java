@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SingIn extends AppCompatActivity  implements View.OnClickListener {
     private Button buttonRegistrarse;
@@ -32,7 +34,7 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
     private boolean administrador;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
-
+    private FirebaseDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +50,30 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
         buttonRegistrarse.setOnClickListener(this);
         sesion.setOnClickListener(this);
 
-        if(admin.isChecked()==true){
-            administrador = true;
-        }
-        else{
-            administrador=false;
-        }
+
 
     }
+
+
+    private void addUserNameToUser(FirebaseUser user,String username) {
+
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(username)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SingIn.this,firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+    }
+
 
     private void registerUser(){
         final String email = editText.getText().toString().trim();
@@ -78,22 +96,45 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this,new OnCompleteListener<AuthResult>()
-        {
+                {
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
+
+                    if(admin.isChecked()==true){
+                        administrador = true;
+                    }
+                    else{
+                        administrador=false;
+                    }
+                    User newUser = new User(username,email,password);
+                    DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference();
+                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("email").setValue(newUser.email);
+                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("username").setValue(newUser.username);
+                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("admin").setValue(administrador);
+                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("bloqueado").setValue(newUser.bloqueado);
+                    addUserNameToUser(task.getResult().getUser(), (String.valueOf(administrador)));
+
+                    if(newUser.isAdmin() == true){
+                         //pantalla de administradores
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+                    }
+                    else{
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+                    }
                     Toast.makeText(SingIn.this,"Registro exitoso",Toast.LENGTH_SHORT).show();
-                    User newUser = new User(username,email,password,false,administrador);
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
-                    mDatabase.child("Usuario").child(String.valueOf(newUser.getId())).setValue(newUser);
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
                 }
                 else {
                     Toast.makeText(SingIn.this,"Registro no fue exitoso",Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
+
+
             }
         });
 

@@ -1,5 +1,6 @@
 package com.davidcr.cines35mm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -18,9 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.davidcr.cines35mm.dominio.Favorito;
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.adapters.PeliculaSimpleAdapter;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,13 +31,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.SocketPermission;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private FirebaseAuth firebaseAuth;
 
     private ArrayList<PeliculaSimple> peliculasBusqueda;
 
@@ -86,8 +93,6 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_home_cliente);
 
         //Mejora rendimiento
@@ -97,7 +102,6 @@ public class HomeActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         obtenerPeliculasInicio();
-        configurarBotonBuscar();
 
         /*ArrayList<PeliculaSimple> peliculaSimples = new ArrayList<>();
         peliculaSimples.add(new PeliculaSimple("Titanic","1980"));
@@ -153,11 +157,13 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_recomendaciones) {
 
         } else if (id == R.id.nav_favoritas) {
-
+            obtenerPeliculasFavoritas();
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {
-
+           // firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -221,6 +227,59 @@ public class HomeActivity extends AppCompatActivity
             }
         });
     }
+
+public void obtenerPeliculasFavoritas(){
+
+    final List<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
+    //todas las peliculas
+    final DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
+
+    //Peliculas favoritas de usuario
+    Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo("Matilda".toString());
+    mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull final DataSnapshot dataSnapshotF) {
+            //todas las peliculas
+            DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
+            //poder leer peliculas
+            peliculas.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
+                    for (DataSnapshot snapshotF : dataSnapshotF.getChildren()) {
+                        String llaveF = snapshotF.getKey();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String llave = snapshot.getKey();
+                            System.out.println("llave: "+llave);
+                            Pelicula pelicula = snapshot.getValue(Pelicula.class);
+                            if (llaveF.equals(llave)) {
+                                peliculasFavoritas.add(new PeliculaSimple(
+                                        llave,
+                                        pelicula
+                                ));
+                            }
+
+                           // mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas,PeliculaSimpleAdapter.)));
+
+                            mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas, getApplicationContext()));
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+
+}
 
     private void desplegarPeliculasSimples(DataSnapshot dataSnapshot){
         ArrayList<PeliculaSimple> peliculasSimples = new ArrayList<>();
