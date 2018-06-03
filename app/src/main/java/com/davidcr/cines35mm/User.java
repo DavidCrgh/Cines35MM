@@ -7,6 +7,24 @@ public class User {
     public String username ;
     public String email;
     public String password;
+    public boolean bloqueado;
+    public boolean Admin;
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    public boolean isAdmin() {
+        return Admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        Admin = admin;
+    }
 
     public int getId() {
         return id;
@@ -36,10 +54,12 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password,boolean bloqueado, boolean Admin) {
         this.id = count.incrementAndGet();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.bloqueado = bloqueado;
+        this.Admin = Admin;
     }
 }

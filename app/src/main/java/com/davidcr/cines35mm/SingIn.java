@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
     private EditText editTextcontrasena;
     private TextView sesion;
     private ProgressDialog progressDialog;
+    private RadioButton admin;
+    private boolean administrador;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
 
@@ -41,8 +44,16 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
         editTextUser = (EditText) findViewById(R.id.username);
         editTextcontrasena = (EditText) findViewById(R.id.password);
         sesion = (TextView) findViewById(R.id.session);
+        admin = (RadioButton) findViewById(R.id.radioButton);
         buttonRegistrarse.setOnClickListener(this);
         sesion.setOnClickListener(this);
+
+        if(admin.isChecked()==true){
+            administrador = true;
+        }
+        else{
+            administrador=false;
+        }
 
     }
 
@@ -74,7 +85,7 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
                     Toast.makeText(SingIn.this,"Registro exitoso",Toast.LENGTH_SHORT).show();
-                    User newUser = new User(username,email,password);
+                    User newUser = new User(username,email,password,false,administrador);
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     mDatabase.child("Usuario").child(String.valueOf(newUser.getId())).setValue(newUser);
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
