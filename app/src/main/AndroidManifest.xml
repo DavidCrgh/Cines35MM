@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davidcr.cines35mm">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -25,6 +26,7 @@
             android:name=".HomeAdminActivity"
             android:label="@string/title_activity_home_admin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SingIn"></activity>
     </application>
 
 </manifest>
