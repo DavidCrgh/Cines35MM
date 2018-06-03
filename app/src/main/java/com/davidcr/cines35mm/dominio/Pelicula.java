@@ -1,4 +1,4 @@
-package com.davidcr.cines35mm.adapters;
+package com.davidcr.cines35mm.dominio;
 
 import java.util.ArrayList;
 
