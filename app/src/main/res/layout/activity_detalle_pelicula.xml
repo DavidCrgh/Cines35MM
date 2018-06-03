@@ -6,4 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".DetallePeliculaActivity">
 
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="346dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Titulo"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_anno_generos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Anno y generos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="141dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_anno_generos"
+        app:srcCompat="@drawable/sample_1" />
+
+    <TextView
+        android:id="@+id/tv_sinopsis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="39dp"
+        android:text="Sinopsis:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
+
+    <TextView
+        android:id="@+id/tv_directores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Directores: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sinopsis" />
+
+    <TextView
+        android:id="@+id/tv_actores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Actores: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tv_directores" />
+
+    <TextView
+        android:id="@+id/tv_keywords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Keywords: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/tv_actores" />
+
 </android.support.constraint.ConstraintLayout>

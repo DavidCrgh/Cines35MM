@@ -182,6 +182,6 @@ public class HomeActivity extends AppCompatActivity
             ));
         }
 
-        mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasSimples));
+        mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasSimples, this));
     }
 }

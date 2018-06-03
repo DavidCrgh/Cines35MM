@@ -1,8 +1,9 @@
 package com.davidcr.cines35mm.dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pelicula {
+public class Pelicula  implements Serializable{
     private String titulo;
     private String anno;
     private String sinopsis;
@@ -86,5 +87,20 @@ public class Pelicula {
 
     public void setActores(ArrayList<String> actores) {
         this.actores = actores;
+    }
+
+    public static String arrayToString(ArrayList<String> listaStrings){
+        int len = listaStrings.size();
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < len; i++){
+            sb.append(listaStrings.get(i));
+            if(i == len - 1){
+                 sb.append(".");
+            } else {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
     }
 }
