@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.net.SocketPermission;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +38,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Hola mundo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -176,18 +178,18 @@ public class HomeActivity extends AppCompatActivity
     }
 
 public void obtenerPeliculasFavoritas(){
-    final ArrayList<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
-    //todas las peliculas
-    final DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
     //Peliculas favoritas de usuario
     Query mBasedatos = FirebaseDatabase.getInstance().getReference().child("favorito").orderByChild("usuario_alias").equalTo("Matilda".toString());
     mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull final DataSnapshot dataSnapshotF) {
+            //todas las peliculas
+            DatabaseReference peliculas = FirebaseDatabase.getInstance().getReference().child("peliculas");
             //poder leer peliculas
             peliculas.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ArrayList<PeliculaSimple> peliculasFavoritas = new ArrayList<>();
                     for (DataSnapshot snapshotF : dataSnapshotF.getChildren()) {
                         String llaveF = snapshotF.getKey();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -200,7 +202,7 @@ public void obtenerPeliculasFavoritas(){
                                         pelicula
                                 ));
                             }
-                            mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas));
+                            mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasFavoritas, getApplicationContext()));
                         }
                     }
                 }
@@ -232,7 +234,7 @@ public void obtenerPeliculasFavoritas(){
             ));
         }
 
-        mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasSimples));
+        mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasSimples, this));
     }
 
 

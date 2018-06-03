@@ -1,6 +1,11 @@
 package com.davidcr.cines35mm.dominio;
 
-public class PeliculaSimple {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class PeliculaSimple implements Serializable{
     private String llave;
     private Pelicula pelicula;
 
@@ -31,5 +36,13 @@ public class PeliculaSimple {
 
     public void setAnno(String anno) {
         this.pelicula.setAnno(anno);
+    }
+
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 }
