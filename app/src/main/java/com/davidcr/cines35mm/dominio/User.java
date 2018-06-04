@@ -13,12 +13,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class User  {
     private static  AtomicInteger count = new AtomicInteger(0);
-    public int id;
     public String username ;
     public String email;
     public String password;
     public boolean bloqueado;
-    public String Admin;
+    public String admin;
 
     public boolean isBloqueado() {
         return bloqueado;
@@ -29,16 +28,13 @@ public class User  {
     }
 
     public String getAdmin() {
-        return Admin;
+        return admin;
     }
 
     public void setAdmin(String admin) {
-        Admin = admin;
+        admin = admin;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getUsername() {
         return username;
@@ -64,11 +60,11 @@ public class User  {
         this.password = password;
     }
 
-    public User(String username, String email, String password) {
-        this.id = count.incrementAndGet();
+    public User(String username, String email, String password, String admin) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.bloqueado = false;
+        this.admin = admin;
     }
 }

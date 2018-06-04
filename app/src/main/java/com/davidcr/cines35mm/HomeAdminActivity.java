@@ -128,6 +128,9 @@ public class HomeAdminActivity extends AppCompatActivity
         else if(id == R.id.nav_peliculas){
             startActivity(new Intent(getApplicationContext(), Form_pelicula.class));
         }
+        else if(id == R.id.nav_usuarios){
+            startActivity(new Intent(getApplicationContext(), UserDetalle.class));
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -28,7 +28,8 @@
             android:name=".HomeAdminActivity"
             android:label="@string/title_activity_home_admin"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Form_pelicula"></activity>
+        <activity android:name=".Form_pelicula" />
+        <activity android:name=".UserDetalle"></activity>
     </application>
 
 </manifest>

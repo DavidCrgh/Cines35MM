@@ -103,22 +103,15 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
 
-
-                    User newUser = new User(username,email,password);
                     if(admin.isChecked() == true){
-                        newUser.setAdmin("true");
                         administrador= "true";
                     }
                     else{
-                        newUser.setAdmin("false");
                         administrador= "false";
                     }
-
                     DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference();
-                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("email").setValue(newUser.email);
-                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("username").setValue(newUser.username);
-                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("admin").setValue(administrador);
-                    mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("bloqueado").setValue(newUser.bloqueado);
+                    User newUser = new User(username,email,password,administrador);
+                    mDatabase2.child("Usuario").push().setValue(newUser);
                     addUserNameToUser(task.getResult().getUser(), administrador);
 
 
