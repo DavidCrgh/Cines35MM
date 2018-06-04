@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/nav_option_comentarios" />
         <item
+            android:id="@+id/nav_peliculas"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/nav_option_peliculas" />
+        <item
             android:id="@+id/nav_salir"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/nav_option_salir" />

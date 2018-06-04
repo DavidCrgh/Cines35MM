@@ -31,7 +31,7 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
     private TextView sesion;
     private ProgressDialog progressDialog;
     private RadioButton admin;
-    private boolean administrador;
+    private String administrador;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private FirebaseDatabase db;
@@ -55,11 +55,11 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
     }
 
 
-    private void addUserNameToUser(FirebaseUser user,String username) {
+    private void addUserNameToUser(FirebaseUser user,String adm) {
 
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(username)
+                .setDisplayName(adm)
                 .build();
 
         user.updateProfile(profileUpdates)
@@ -103,23 +103,28 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
 
-                    if(admin.isChecked()==true){
-                        administrador = true;
+
+                    User newUser = new User(username,email,password);
+                    if(admin.isChecked() == true){
+                        newUser.setAdmin("true");
+                        administrador= "true";
                     }
                     else{
-                        administrador=false;
+                        newUser.setAdmin("false");
+                        administrador= "false";
                     }
-                    User newUser = new User(username,email,password);
+
                     DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference();
                     mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("email").setValue(newUser.email);
                     mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("username").setValue(newUser.username);
                     mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("admin").setValue(administrador);
                     mDatabase2.child("Usuario").child(String.valueOf(newUser.getId())).child("bloqueado").setValue(newUser.bloqueado);
-                    addUserNameToUser(task.getResult().getUser(), (String.valueOf(administrador)));
+                    addUserNameToUser(task.getResult().getUser(), administrador);
 
-                    if(newUser.isAdmin() == true){
+
+                    if(newUser.getAdmin().equals("true")){
                          //pantalla de administradores
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeAdminActivity.class));
 
                     }
                     else{
