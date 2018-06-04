@@ -56,8 +56,6 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
 
 
     private void addUserNameToUser(FirebaseUser user,String adm) {
-
-
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(adm)
                 .build();

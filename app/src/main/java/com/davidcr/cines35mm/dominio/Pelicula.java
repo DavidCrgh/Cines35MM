@@ -96,7 +96,7 @@ public class Pelicula  implements Serializable{
         for(int i = 0; i < len; i++){
             sb.append(listaStrings.get(i));
             if(i == len - 1){
-                 sb.append(".");
+                 sb.append("");
             } else {
                 sb.append(", ");
             }

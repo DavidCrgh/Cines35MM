@@ -11,13 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Usuarios"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -41,10 +42,10 @@
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="17dp"
+        android:layout_height="27dp"
         android:layout_marginBottom="26dp"
         android:layout_marginTop="29dp"
-        android:text="Bloquear-Desbloquear"
+        android:text="Presione usuario para bloquear o desbloquear"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"

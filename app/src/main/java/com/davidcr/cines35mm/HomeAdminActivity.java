@@ -28,15 +28,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
-public class HomeAdminActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeAdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
+    private FirebaseAuth firebaseAuth;
     private ArrayList<PeliculaSimple> peliculasBusqueda;
 
     @Override
@@ -50,8 +49,9 @@ public class HomeAdminActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(getApplicationContext(), Form_pelicula.class));
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -116,14 +116,11 @@ public class HomeAdminActivity extends AppCompatActivity
 
         if (id == R.id.nav_inicio) {
 
-        } else if (id == R.id.nav_recomendaciones) {
-
-        } else if (id == R.id.nav_favoritas) {
-
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {
-
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
         }
         else if(id == R.id.nav_peliculas){
             startActivity(new Intent(getApplicationContext(), Form_pelicula.class));
