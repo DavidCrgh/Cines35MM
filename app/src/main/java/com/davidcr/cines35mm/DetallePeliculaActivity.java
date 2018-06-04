@@ -1,6 +1,7 @@
 package com.davidcr.cines35mm;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,23 @@ import android.widget.TextView;
 
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
+import com.davidcr.cines35mm.dominio.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-public class DetallePeliculaActivity extends AppCompatActivity {
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+public class DetallePeliculaActivity extends AppCompatActivity implements View.OnClickListener {
     private String llavePelicula;
     private Pelicula pelicula;
-
+    private Button favs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +38,8 @@ public class DetallePeliculaActivity extends AppCompatActivity {
         //Hace que no despliege el teclado cuando se abre la actividad
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         configurarInterfazAdmin(); //Siempre debe ir al final de onCreate
-
+        favs = (Button) findViewById(R.id.btn_favorito);
+        favs.setOnClickListener(DetallePeliculaActivity.this);
     }
 
     private void getIncomingIntent(){
@@ -90,5 +103,26 @@ public class DetallePeliculaActivity extends AppCompatActivity {
         intent.putExtra("LLAVE_PELICULA", llavePelicula);
         intent.putExtra("PELICULA", pelicula);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser().getDisplayName().equals("false")){
+            if(v == favs ){
+                Toast.makeText(this,firebaseAuth.getCurrentUser().getEmail().toString(),Toast.LENGTH_SHORT).show();
+                ArrayList<String> fav = new ArrayList<String>();
+                fav.add(firebaseAuth.getCurrentUser().getEmail().toString());
+                fav.add(pelicula.getTitulo());
+                DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference();
+                mDatabase2.child("favorito").push().setValue(fav);
+            }
+        }
+        if(firebaseAuth.getCurrentUser().getDisplayName().equals("true")){
+            if(v == favs ){
+                abrirPantallaModificar();
+            }
+        }
+
     }
 }

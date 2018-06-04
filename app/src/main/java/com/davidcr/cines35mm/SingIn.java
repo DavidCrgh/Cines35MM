@@ -65,7 +65,7 @@ public class SingIn extends AppCompatActivity  implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SingIn.this,firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SingIn.this,firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_LONG).show();
 
                         }
                     }
