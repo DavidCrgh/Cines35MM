@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase db;
+    private String currentAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,21 +83,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                            if(firebaseAuth.getCurrentUser().getDisplayName().equals("true"))
-                            {
-                                //abrir administrador
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), HomeAdminActivity.class));
-                               // Toast.makeText(LoginActivity.this,"admin"+firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
+                            DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference("Usuario");
+                            Query query = UserRef.orderByChild("email").equalTo(em);
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                        currentAdmin = child.child("admin").getValue(String.class);
+                                        if (currentAdmin.equals("true")) {
+                                            finish();
+                                            startActivity(new Intent(getApplicationContext(), HomeAdminActivity.class));
+                                        } else {
+                                            finish();
+                                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                        }
 
-                            }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
+                            });
                         }
                         else{
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                         //   Toast.makeText(LoginActivity.this,"admin"+firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this,"Contraseña o usuario incorrecto",Toast.LENGTH_SHORT).show();
 
                         }
                     }
