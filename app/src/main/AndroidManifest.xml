@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davidcr.cines35mm">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,13 +22,13 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".SingIn"></activity>
-        <activity android:name=".DetallePeliculaActivity"></activity>
+        <activity android:name=".SingIn" />
+        <activity android:name=".DetallePeliculaActivity" />
         <activity
             android:name=".HomeAdminActivity"
             android:label="@string/title_activity_home_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Form_pelicula"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.davidcr.cines35mm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.davidcr.cines35mm.dominio.Favorito;
@@ -38,6 +42,8 @@ public class HomeActivity extends AppCompatActivity
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseAuth firebaseAuth;
+
+    private ArrayList<PeliculaSimple> peliculasBusqueda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +102,7 @@ public class HomeActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         obtenerPeliculasInicio();
+        configurarBotonBuscar();
 
         /*ArrayList<PeliculaSimple> peliculaSimples = new ArrayList<>();
         peliculaSimples.add(new PeliculaSimple("Titanic","1980"));
@@ -165,9 +172,49 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
+    public void configurarBotonBuscar(){
+        ImageView imagenBuscar = findViewById(R.id.img_buscar);
+        imagenBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Snackbar.make(v, "HOLA MUNDO", Snackbar.LENGTH_LONG).setAction("Action", null). show();
+                obtenerPeliculasBusqueda();
+            }
+        });
+        peliculasBusqueda = new ArrayList<>();
+    }
+
+    public void obtenerPeliculasBusqueda(){
+        peliculasBusqueda.clear();
+        EditText entrada_termino = findViewById(R.id.txt_termino_busqueda);
+        String termino = entrada_termino.getText().toString();
+
+        DatabaseReference mBasedatos =
+                FirebaseDatabase.getInstance().getReference().child("peliculas");
+        //mBasedatos.push().setValue()
+
+        Query consulta;
+        String[] atributos = {"titulo", "anno", "sinopsis"};
+
+        for(String atributo : atributos){
+            consulta = mBasedatos.orderByChild(atributo).startAt(termino).endAt(termino + "\uf8ff"); //Unicode requerido por Firebase
+            consulta.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    desplegarPeliculasBusqueda(dataSnapshot);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
     public void obtenerPeliculasInicio(){
-        //Todas las peliculas
-        DatabaseReference mBasedatos = FirebaseDatabase.getInstance().getReference().child("peliculas");
+        DatabaseReference mBasedatos =
+                FirebaseDatabase.getInstance().getReference().child("peliculas");
 
         mBasedatos.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -251,6 +298,21 @@ public void obtenerPeliculasFavoritas(){
     }
 
 
+    private void desplegarPeliculasBusqueda(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            String llave = snapshot.getKey();
+            Pelicula pelicula = snapshot.getValue(Pelicula.class);
+            agregarPeliculaBusqueda(llave, pelicula);
+        }
+        mRecyclerView.setAdapter(new PeliculaSimpleAdapter(peliculasBusqueda, this));
+    }
 
-
+    private void agregarPeliculaBusqueda(String llave, Pelicula pelicula) {
+        for(PeliculaSimple peliculaSimple : peliculasBusqueda){
+            if(peliculaSimple.getLlave().equals(llave)){
+                return;
+            }
+        }
+        peliculasBusqueda.add(new PeliculaSimple(llave, pelicula));
+    }
 }

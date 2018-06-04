@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Form_pelicula">
+
+        <TextView
+            android:id="@+id/PeliculaTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Película"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/directores"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+        <EditText
+            android:id="@+id/genero"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginBottom="44dp"
+            android:layout_marginTop="39dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/Actores"
+            app:layout_constraintStart_toStartOf="@+id/anos"
+            app:layout_constraintTop_toTopOf="@+id/anos" />
+
+        <Button
+            android:id="@+id/Registrar"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="33dp"
+            android:text="Registrar película"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/Sipnosis" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Directores"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/directores"
+            app:layout_constraintEnd_toEndOf="@+id/ano"
+            app:layout_constraintStart_toEndOf="@+id/ano" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="Palabras claves:"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Palabras_claves"
+            app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:text="Sipnosis:"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Sipnosis"
+            app:layout_constraintEnd_toEndOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Titulo:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+        <EditText
+            android:id="@+id/Actores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/Palabras_claves"
+            app:layout_constraintTop_toBottomOf="@+id/generos" />
+
+        <EditText
+            android:id="@+id/Palabras_claves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="23dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/Actores" />
+
+        <EditText
+            android:id="@+id/Sipnosis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="31dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/Palabras_claves" />
+
+        <android.support.constraint.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="74dp" />
+
+        <TextView
+            android:id="@+id/ano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="16dp"
+            android:text="Año:"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/generos"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/actores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Actores"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/Actores"
+            app:layout_constraintEnd_toEndOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/generos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Género"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/actores"
+            app:layout_constraintTop_toBottomOf="@+id/ano" />
+
+        <EditText
+            android:id="@+id/directores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+        <EditText
+            android:id="@+id/anos"
+            android:layout_width="165dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/directores"
+            app:layout_constraintTop_toBottomOf="@+id/directores" />
+
+</android.support.constraint.ConstraintLayout>

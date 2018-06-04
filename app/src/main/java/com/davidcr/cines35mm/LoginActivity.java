@@ -46,8 +46,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Para saltar directo al inicio, quitar despues //TODO
-
-
+        //Intent intent = new Intent(this, HomeActivity.class);
+        //startActivity(intent);
+        ///////////////////////////////////////////////////////////////
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null){
 
@@ -87,14 +88,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             {
                                 //abrir administrador
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                startActivity(new Intent(getApplicationContext(), HomeAdminActivity.class));
+                               // Toast.makeText(LoginActivity.this,"admin"+firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
 
                             }
                         }
                         else{
-
                             finish();
                             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                         //   Toast.makeText(LoginActivity.this,"admin"+firebaseAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
 
                         }
                     }

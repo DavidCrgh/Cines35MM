@@ -17,6 +17,7 @@ public class DetallePeliculaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_pelicula);
         getIncomingIntent();
         llenarDetallesPelicula();
+        //Hace que no despliege el teclado cuando se abre la actividad
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 

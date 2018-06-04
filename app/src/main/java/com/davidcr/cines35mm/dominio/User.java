@@ -3,6 +3,7 @@ import android.support.annotation.NonNull;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.davidcr.cines35mm.SingIn;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +18,7 @@ public class User  {
     public String email;
     public String password;
     public boolean bloqueado;
-    public boolean Admin;
+    public String Admin;
 
     public boolean isBloqueado() {
         return bloqueado;
@@ -27,11 +28,11 @@ public class User  {
         this.bloqueado = bloqueado;
     }
 
-    public boolean isAdmin() {
+    public String getAdmin() {
         return Admin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(String admin) {
         Admin = admin;
     }
 
@@ -69,6 +70,5 @@ public class User  {
         this.email = email;
         this.password = password;
         this.bloqueado = false;
-        this.Admin = true;
     }
 }
