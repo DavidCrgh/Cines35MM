@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class Form_pelicula extends AppCompatActivity implements View.OnClickList
     private EditText keywords;
     private Button Registrar;
 
+    private String llavePelicula;
+    private Pelicula pelicula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,10 @@ public class Form_pelicula extends AppCompatActivity implements View.OnClickList
         actores  =(EditText)  findViewById(R.id.Actores);
         sipnosis  =(EditText)  findViewById(R.id.Sipnosis);
         keywords  =(EditText)  findViewById(R.id.Palabras_claves);
-        Registrar = (Button) findViewById(R.id.Registrar);
+        Registrar = (Button) findViewById(R.id.btn_registrar);
         Registrar.setOnClickListener(this);
+
+        configurarInterfazModificar();
         }
 
     @Override
@@ -69,7 +74,36 @@ public class Form_pelicula extends AppCompatActivity implements View.OnClickList
                     dir,
                     act);
             DatabaseReference mBasedatos = FirebaseDatabase.getInstance().getReference();
-            mBasedatos.child("peliculas").push().setValue(pelicula);
+            if(getIntent().hasExtra("IS_EDIT_MODE")){
+                mBasedatos.child("peliculas").child(llavePelicula).setValue(pelicula);
+            } else{
+                mBasedatos.child("peliculas").push().setValue(pelicula);
+            }
+
         }
+    }
+
+    private void configurarInterfazModificar(){
+        if(getIntent().hasExtra("IS_EDIT_MODE")){
+            llavePelicula = getIntent().getStringExtra("LLAVE_PELICULA");
+            pelicula = (Pelicula) getIntent().getSerializableExtra("PELICULA");
+            cargarDatosPelicula();
+
+            TextView tituloPantalla = findViewById(R.id.titulo_formulario);
+            tituloPantalla.setText("Modificar película");
+
+            Button boton_modificar = findViewById(R.id.btn_registrar);
+            boton_modificar.setText("MODIFICAR PELÍCULA");
+        }
+    }
+
+    private void cargarDatosPelicula(){
+        titulo.setText(pelicula.getTitulo());
+        ano.setText(pelicula.getAnno());
+        sipnosis.setText(pelicula.getSinopsis());
+        actores.setText(Pelicula.arrayToString(pelicula.getActores()));
+        directores.setText(Pelicula.arrayToString(pelicula.getDirectores()));
+        generos.setText(Pelicula.arrayToString(pelicula.getGeneros()));
+        keywords.setText(Pelicula.arrayToString(pelicula.getKeywords()));
     }
 }

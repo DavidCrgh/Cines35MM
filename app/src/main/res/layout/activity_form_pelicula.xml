@@ -7,12 +7,12 @@
     tools:context=".Form_pelicula">
 
         <TextView
-            android:id="@+id/PeliculaTitulo"
+            android:id="@+id/titulo_formulario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Película"
+            android:text="Insertar Película"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -20,33 +20,30 @@
         <EditText
             android:id="@+id/nombre"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="11dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/directores"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="@+id/directores" />
 
         <EditText
             android:id="@+id/genero"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="31dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/Actores"
-            app:layout_constraintStart_toEndOf="@+id/actores"
-            app:layout_constraintTop_toBottomOf="@+id/ano" />
+            app:layout_constraintStart_toEndOf="@+id/generos"
+            app:layout_constraintTop_toBottomOf="@+id/anos" />
 
         <Button
-            android:id="@+id/Registrar"
+            android:id="@+id/btn_registrar"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="46dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="33dp"
             android:text="Registrar película"
@@ -97,9 +94,8 @@
         <EditText
             android:id="@+id/Actores"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
-            android:layout_marginTop="65dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="104dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
@@ -109,9 +105,9 @@
         <EditText
             android:id="@+id/Palabras_claves"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="23dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
@@ -121,9 +117,9 @@
         <EditText
             android:id="@+id/Sipnosis"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="62dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
@@ -157,8 +153,7 @@
             android:id="@+id/ano"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="32dp"
             android:text="Año:"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/generos"
@@ -180,14 +175,13 @@
             android:layout_marginStart="66dp"
             android:text="Género"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/genero"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/genero" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/genero"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/directores"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
             android:layout_marginStart="13dp"
             android:layout_marginTop="16dp"
             android:ems="10"
@@ -199,15 +193,13 @@
         <EditText
             android:id="@+id/anos"
             android:layout_width="0dp"
-            android:layout_height="27dp"
-            android:layout_marginBottom="153dp"
-            android:layout_marginTop="153dp"
+            android:layout_height="46dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/Sipnosis"
+            app:layout_constraintBaseline_toBaselineOf="@+id/ano"
             app:layout_constraintEnd_toEndOf="@+id/genero"
-            app:layout_constraintStart_toStartOf="@+id/genero"
-            app:layout_constraintTop_toTopOf="@+id/PeliculaTitulo" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/genero" />
 
 </android.support.constraint.ConstraintLayout>
