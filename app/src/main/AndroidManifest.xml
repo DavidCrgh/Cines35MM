@@ -29,7 +29,8 @@
             android:label="@string/title_activity_home_admin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Form_pelicula" />
-        <activity android:name=".UserDetalle"></activity>
+        <activity android:name=".UserDetalle" />
+        <activity android:name=".Favoritos"></activity>
     </application>
 
 </manifest>

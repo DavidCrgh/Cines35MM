@@ -2,7 +2,7 @@ package com.davidcr.cines35mm.dominio;
 
 public class Favorito {
     private String usuario_alias;
-    private Integer pelicula_id;
+    private String pelicula_id;
 
     public String getUsuario_alias() {
         return usuario_alias;
@@ -12,11 +12,11 @@ public class Favorito {
         this.usuario_alias = usuario_alias;
     }
 
-    public Integer getPelicula_id() {
+    public String getPelicula_id() {
         return pelicula_id;
     }
 
-    public void setPelicula_id(Integer pelicula_id) {
+    public void setPelicula_id(String pelicula_id) {
         this.pelicula_id = pelicula_id;
     }
 
@@ -26,5 +26,10 @@ public class Favorito {
                 "usuario_alias='" + usuario_alias + '\'' +
                 ", pelicula_id=" + pelicula_id +
                 '}';
+    }
+
+    public Favorito(String usuario_alias, String pelicula_id) {
+        this.usuario_alias = usuario_alias;
+        this.pelicula_id = pelicula_id;
     }
 }

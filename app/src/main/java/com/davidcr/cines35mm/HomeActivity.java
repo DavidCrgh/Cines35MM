@@ -158,7 +158,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_recomendaciones) {
 
         } else if (id == R.id.nav_favoritas) {
-            obtenerPeliculasFavoritas();
+            finish();
+            startActivity(new Intent(getApplicationContext(),Favoritos.class));
         } else if (id == R.id.nav_comentarios) {
 
         } else if (id == R.id.nav_salir) {

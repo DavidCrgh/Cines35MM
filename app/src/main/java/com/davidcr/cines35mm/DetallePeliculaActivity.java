@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.davidcr.cines35mm.dominio.Favorito;
 import com.davidcr.cines35mm.dominio.Pelicula;
 import com.davidcr.cines35mm.dominio.PeliculaSimple;
 import com.davidcr.cines35mm.dominio.User;
@@ -111,9 +112,7 @@ public class DetallePeliculaActivity extends AppCompatActivity implements View.O
         if(firebaseAuth.getCurrentUser().getDisplayName().equals("false")){
             if(v == favs ){
                 Toast.makeText(this,firebaseAuth.getCurrentUser().getEmail().toString(),Toast.LENGTH_SHORT).show();
-                ArrayList<String> fav = new ArrayList<String>();
-                fav.add(firebaseAuth.getCurrentUser().getEmail().toString());
-                fav.add(pelicula.getTitulo());
+                Favorito fav = new Favorito(firebaseAuth.getCurrentUser().getEmail().toString(),pelicula.getTitulo());
                 DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference();
                 mDatabase2.child("favorito").push().setValue(fav);
             }
